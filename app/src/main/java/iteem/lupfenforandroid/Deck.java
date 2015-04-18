@@ -1,19 +1,22 @@
 package iteem.lupfenforandroid;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Stack;
 
 public class Deck extends ArrayList<Card> {
 
     private String mName;
 
-    public Deck(aName){
+    public Deck(String aName){
         this.mName = aName;
     }
 
     public Stack<Card> shuffle() {
-        Stack<Card> mCards = new Stack<Card>();
+        Stack<Card> mCards = new Stack<>();
 
-        for (Card e : Collections.shuffle(this)) {
+        Collections.shuffle(this);
+
+        for (Card e : this) {
             mCards.push(e);
         }
         return mCards; 

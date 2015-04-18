@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">LupfenForAndroid</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="deck_name">Deutsches Blatt</string>
+    <string name="deck_colour1">Schellen</string>
+    <string name="deck_colour2">Herz</string>
+    <string name="deck_colour3">Eichel</string>
+    <string name="deck_colour4">Blatt</string>
+    <string name="deck_cardname1">Unter</string>
+    <string name="deck_cardname2">Ober</string>
+    <string name="deck_cardname3">König</string>
+    <string name="deck_cardname4">10</string>
+    <string name="deck_cardname5">Ass</string>
 </resources>

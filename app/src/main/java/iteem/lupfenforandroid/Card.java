@@ -6,7 +6,7 @@ public class Card {
     private String mName;
     private String mImage;
 
-    public Card(int aValue, String aName, String mColour) {
+    public Card(int aValue, String aName, String aColour) {
         this.mValue = aValue;
         this.mName = aName;
         this.mColour = aColour;
