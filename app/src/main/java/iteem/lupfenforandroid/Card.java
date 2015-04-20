@@ -10,7 +10,19 @@ public class Card {
         this.mValue = aValue;
         this.mName = aName;
         this.mColour = aColour;
-    } 
+    }
+
+    public int getValue() {
+        return mValue;
+    }
+
+    public String getColour() {
+        return mColour;
+    }
+
+    public String getName() {
+        return mName;
+    }
 
     @Override
     public String toString() {
