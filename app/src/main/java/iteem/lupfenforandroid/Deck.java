@@ -1,30 +1,32 @@
 package iteem.lupfenforandroid;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Stack;
+import java.util.Vector;
 
-public class Deck extends ArrayList<Card> {
+public class Deck extends Vector<Card> {
 
-    private String mName;
+    private String name;
 
-    public Deck(aName){
-        this.mName = aName;
+    public Deck(String aName) {
+        this.name = aName;
     }
 
     public Stack<Card> shuffle() {
-        Stack<Card> mCards = new Stack<Card>();
+        Stack<Card> cards = new Stack<>();
+        Collections.shuffle(this);
 
-        for (Card e : Collections.shuffle(this)) {
-            mCards.push(e);
+        for (Card e : this) {
+            cards.push(e);
         }
-        return mCards; 
+        return cards; 
     }
 
     public String getName() {
-        return this.mName;
+        return this.name;
     }
 
     @Override
     public String toString() {
-        return this.mName + " " + this.size();
+        return this.name + " " + this.size();
     }
 }
