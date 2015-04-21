@@ -1,72 +1,82 @@
 package iteem.lupfenforandroid;
 
-import java.util.Stack;
 import java.util.Vector;
 
 /**
- * Created by Gaddnzwerch on 18.04.2015.
+ * Here is the description of what the method is doing. Some specific things that will      
+ * be helpful to the caller like {@link OtherClass#methodName()}
+ * @param aParam What your param is or used for in your method
+ * @return what your method is returning
+ * @see OtherClass
  */
-public class Trick  {
+public class Trick {    
+    private Vector<PlayerCard> playedCards;
+    private PlayerCard trick; 
+    private Card trump;
+    private Boolean trumpPlayed;
+    private String colour;
 
-    private Card mTrump;
-    private PlayerCard mTrick; // the card currently
-    private Card mFirstCard; // important for the following players
-    private Stack<PlayerCard> mPlayedCards;
-    private Boolean mTrumpPlayed;
-
-    public Trick (Card aTrump) {
-        this.mTrumpPlayed = false;
-        this.mTrump = aTrump;
+    public Trick(Card aTrump) {
+        this.trump = aTrump;
+        this.playedCards = new Vector<>();
+        this.trumpPlayed = false;
     }
 
-    public String getColur() {
-        return this.mFirstCard.getColour();
-    }
-
-    public void play (Player aPlayer, Card aCard) {
-        PlayerCard mPlayerCard = new PlayerCard(aPlayer, aCard);
-        this.mPlayedCards.add(mPlayerCard);
-        Boolean mCardIsTrump = aCard.getColour() == mTrump.getColour();
-
-        if(this.mPlayedCards.empty()){
-            this.mFirstCard = aCard;
-            // first Card played is always the trick
-            this.mTrick = mPlayerCard;
+    public void play(Player aPlayer, Card aCard) {
+        PlayerCard playerCard = new PlayerCard(aPlayer, aCard);
+        Boolean cardIsTrump = (aCard.getColour() == trump.getColour());
+        
+        if(this.playedCards.size()==0) { 
+            // first card played sets colour and is always trick
+            this.trick = playerCard;
+            this.colour = aCard.getColour();
         } else {
-            if(this.mTrumpPlayed && mCardIsTrump){
-                // a played trump can just be overtrumped by another trump
-                if(aCard.getValue() > this.mTrick.mCard.getValue()){
-                    this.mTrick = mPlayerCard;
+            if(this.trumpPlayed && cardIsTrump){
+                // if a trump was played it can only be beaten by another trump
+                if (this.trick.card.getValue() < aCard.getValue()) {
+                    this.trick = playerCard;
                 }
             } else {
-                if(mCardIsTrump){
-                    // every no-trump-card is overtrumped by a trump
-                    this.mTrick = mPlayerCard;
-                } else if (aCard.getColour() == this.mTrick.mCard.getColour() ) {
-                    // cards of the same colour can be overtrumped by value
-                    if(aCard.getValue() > this.mTrick.mCard.getValue()){
-                        this.mTrick = mPlayerCard;
-                    }
-                }
+                // a normal card is automaticly beaten by a trump
+                if (cardIsTrump) {
+                    this.trick = playerCard;
+                } else if (this.colour == aCard.getColour() && this.trick.card.getValue() < aCard.getValue()) {
+                // the colour must be the same an the value higher
+                    this.trick = playerCard;
+                } 
             }
         }
-
-        if(mCardIsTrump) {
-            this.mTrumpPlayed = true;
+        
+        if (cardIsTrump &! this.trumpPlayed) {
+            this.trumpPlayed = true;
         }
+        this.playedCards.add(playerCard);
     }
 
     public Player getWinner() {
-        return this.mTrick.mPlayer;
+        return trick.player;
     }
 
+    /** inner class to store the information which player played which card
+     */
     class PlayerCard {
-        Player mPlayer;
-        Card mCard;
+        Player player;
+        Card card;
 
-        protected PlayerCard (Player aPlayer, Card aCard) {
-            this.mPlayer = aPlayer;
-            this.mCard = aCard;
+        protected PlayerCard(Player aPlayer, Card aCard) {
+            this.player = aPlayer;
+            this.card = aCard;
         }
     }
+
+    public String getColour() {
+        return this.colour;
+    }
+    public String getTrumpColour() {
+        return this.trump.getColour();
+    }
+    public int getCardCount() {
+        return this.playedCards.size();
+    }
+
 }
