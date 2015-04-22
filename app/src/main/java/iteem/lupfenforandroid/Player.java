@@ -14,6 +14,14 @@ public class Player {
     public Player() {
         this.newRound();
     }
+
+    public void pay(int aAmount) {
+        this.wealth -= aAmount;
+    }
+
+    public void win(int aAmount) {
+        this.wealth += aAmount;
+    }
    
     public void showCards() {
         this.cardsSeen = true;
@@ -43,7 +51,7 @@ public class Player {
         Card card = this.playableCards.elementAt(0);
         this.cards.remove(card);
         //DEBUG 
-        System.out.println("spielt " + card);
+        System.out.println(this + " spielt " + card);
         return card;
     }
     public void calculatePlayableCards(Trick aTrick) {
@@ -53,8 +61,6 @@ public class Player {
         // otherwise all cards can be played
         Vector<Card> sameColour = new Vector<>();
         Vector<Card> trumps = new Vector<>();
-        // DEBUG 
-        System.out.println(this + " alle: " + this.cards);
 
         if(aTrick.getCardCount() > 0) {
             for(Card card: this.cards) {
@@ -68,42 +74,19 @@ public class Player {
         }    
         this.playableCards = this.cards;
         if (trumps.size() > 0) {
-            // DEBUG
-            System.out.print("hat Trumpf ");
             this.playableCards = trumps;
         }
         if (sameColour.size() > 0) {
-            System.out.print("muss zugeben ");
             this.playableCards = sameColour;
-        }
-        
+        } 
         // DEBUG
-        System.out.println("Spielbar: " + this.playableCards);
-    }
-    public void recieveCard(Card aCard) {
-        this.mHand.recieveCard(aCard);
-    }
-    public Card play(Trick aTrick) {
-        // signals the Player to play a Card
+        System.out.println(this + " " + this.playableCards);
     }
 
-    private class Hand {
-        private Vector<Card> mCards;
-        private Boolean mSeen;
-
-        public Hand() {
-            mCards = new Vector<>();
-            mSeen = false;
-        }
-
-        public void recieveCard(Card aCard) {
-            mCards.add(aCard);
-        }
-
-        public Vector<Card> possibleCards(Trick aTrick) {
-            
-        }
-
+    public int getTrickCount() {
+        return this.tricks.size();
     }
-
+    public void addTrick(Trick aTrick) {
+        this.tricks.add(aTrick);
+    } 
 }

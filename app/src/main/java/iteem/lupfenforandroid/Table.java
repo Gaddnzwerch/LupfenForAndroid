@@ -1,45 +1,76 @@
 package iteem.lupfenforandroid;
 
-import java.util.Vector;
 import java.util.Stack;
-import java.util.Iterator;
 
 public class Table {
     private Player dealer;
-    private Player player;
     private Deck deck;
     private Stack<Card> stack;
     private Playround players; 
     private Trick trick;
+    protected final int NOOFCARDS = 3;
+    private final int BET = 5;
+    private int pot;
+    private Round round;
 
     public Table(Deck aDeck) {
         this.deck = aDeck;
         this.players = new Playround();
+        this.pot = 0;
     }
 
     public void startRound() {
-        this.stack = this.deck.shuffle();
-        this.deal(3); 
-    }
-
-    public void lupf() {
-        this.trick = new Trick(this.stack.pop());
+        Stack<Card> stack = this.deck.shuffle();
+        this.deal(NOOFCARDS, stack);
+        this.round = new iteem.lupfenforandroid.Round(stack);
+        this.round.setObligatory(this.pot == 0);
+        if(this.round.isObligatory()) {
+            for(Player player:this.players) {
+                player.newRound();
+                player.pay(BET);
+                this.pot += BET;
+                this.round.addPlayer(players);
+            }
+        }
+        this.players.lastPlayer(this.dealer);
         // DEBUG
-        System.out.println("Es ist " + this.trick.getTrumpColour());
+        System.out.println("Pot: " + this.pot);
     }
 
-    private void deal(int aNoOfCards) {
+    public void lupf() { 
+        this.round.lupf();
+    }
+
+    public void playRound() {
+        this.round.play();
+    }
+
+    public void finishRound() {
+        int oldPotSize = this.pot;
+        int share = this.pot / 3;
+        this.pot = 0;
+        Playround players = this.round.getPlayers();
+        for(Player player : players) {
+            if(player.getTrickCount() == 0) {
+                this.pot += oldPotSize;
+                player.pay(oldPotSize);
+            } else {
+                player.win(player.getTrickCount() * share);
+            }
+            // DEBUG
+            System.out.println(player + " : " + player.getWealth());
+        }
+        System.out.println("Pot: " + this.pot);
+    }
+    
+    private void deal(int aNoOfCards, Stack<Card> aStack) {
         this.players.lastPlayer(this.dealer);
 
         for(int i = 1; i <= aNoOfCards; i++) {
             for (Player player: this.players) {
-                // DEBUG
-                System.out.println(player);
-                player.receiveCard(this.stack.pop());
+                player.receiveCard(aStack.pop());
             }
         }
-        // DEBUG
-        System.out.println(this.stack);
     }
 
     public void addPlayer(Player aPlayer) { 
@@ -48,75 +79,4 @@ public class Table {
             this.dealer = aPlayer;
         }
     }
-
-    private class Playround extends Vector<Player>{
-       int currentPlayer;
-       int starting;
-       int lastIndex;
-       
-       public Playround() {
-           super();
-           this.currentPlayer = 0;
-           this.lastIndex = 0;
-       }
-       public void lastPlayer(Player aPlayer) {
-           this.lastIndex = this.indexOf(aPlayer);
-       }
-       public void firstPlayer(Player aPlayer) {
-           int index = this.indexOf(aPlayer) - 1;
-           if(index<0) {
-               index = 0;
-           }
-
-           this.lastIndex = index;
-       }
-
-       @Override
-       public Iterator<Player> iterator() {
-           return new PlayerIterator(this, this.lastIndex);
-       }
-
-       private class PlayerIterator implements Iterator<Player> {
-
-           Playround data;
-           int currentIndex;
-           int lastIndex;
-
-           public PlayerIterator(Playround aData, int aLastIndex) {
-               this.data = aData;
-               this.currentIndex = aLastIndex;
-               this.currentIndex = this.getNextIndex();
-               this.lastIndex = aLastIndex;
-               // DEBUG
-               System.out.println(aLastIndex);
-           }
-            
-           @Override
-           public boolean hasNext() {
-               return (this.currentIndex != this.lastIndex); 
-           }
-           
-           @Override
-           public Player next() {
-               this.currentIndex = this.getNextIndex();
-               return this.data.elementAt(this.currentIndex); 
-           }
-           
-           private int getNextIndex() {
-               int nextIndex = this.currentIndex + 1;
-               if (nextIndex >= this.data.size()) {
-                   nextIndex = 0;
-               }
-               return nextIndex;
-           }
-
-           @Override
-           public void remove() {
-               throw new UnsupportedOperationException();
-           }
-
-       }
-    }
-
-    
 }

@@ -69,6 +69,10 @@ public class Trick {
         }
     }
 
+    public Card getTrump() {
+        return this.trump;
+    }
+
     public String getColour() {
         return this.colour;
     }
