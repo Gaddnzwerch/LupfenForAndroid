@@ -12,6 +12,7 @@ public class Player {
     private Vector<Card> playableCards;
 
     public Player() {
+        this.cards = new Vector<>();
         this.newRound();
     }
 
@@ -29,7 +30,6 @@ public class Player {
     public void newRound() {
         this.cardsSeen = false;
         this.tricks = new Vector<Trick>();
-        this.cards = new Vector<Card>();
         this.cardValue = 0;
     }
     public void receiveCard(Card aCard) {
@@ -79,8 +79,6 @@ public class Player {
         if (sameColour.size() > 0) {
             this.playableCards = sameColour;
         } 
-        // DEBUG
-        System.out.println(this + " " + this.playableCards);
     }
 
     public int getTrickCount() {

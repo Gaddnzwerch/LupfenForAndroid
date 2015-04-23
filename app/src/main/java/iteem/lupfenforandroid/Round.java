@@ -20,6 +20,7 @@ public class Round {
     public void addPlayer(Playround aPlayround) {
         this.players = aPlayround;
     }
+
     public void lupf() { 
         this.trick = new Trick(this.stack.pop());
         // DEBUG 
