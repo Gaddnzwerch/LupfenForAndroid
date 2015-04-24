@@ -69,7 +69,6 @@ public class Playround extends Vector<Player>{
        @Override
        public void remove() {
            throw new UnsupportedOperationException();
-       }
-
+       } 
    }
 } 

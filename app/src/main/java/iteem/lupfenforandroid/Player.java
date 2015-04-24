@@ -46,6 +46,10 @@ public class Player {
     public double getWealth() {
         return this.wealth;
     }
+
+    public void dropCards() {
+        this.cards.clear();
+    }
     public Card playCard() {
         // TODO has to be in UI
         Card card = this.playableCards.elementAt(0);

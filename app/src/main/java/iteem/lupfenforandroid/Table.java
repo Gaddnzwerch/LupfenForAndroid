@@ -11,7 +11,7 @@ public class Table {
     protected final int NOOFCARDS = 3;
     private final int BET = 5;
     private int pot;
-    private Round round;
+    private iteem.lupfenforandroid.Round round;
 
     public Table(Deck aDeck) {
         this.deck = aDeck;
@@ -20,6 +20,9 @@ public class Table {
     }
 
     public void startRound() {
+        //DEBUG
+        System.out.println("Am Tisch: " + this.players);
+
         Stack<Card> stack = this.deck.shuffle();
         this.deal(NOOFCARDS, stack);
         this.round = new iteem.lupfenforandroid.Round(stack);
@@ -31,10 +34,16 @@ public class Table {
                 this.pot += BET;
                 this.round.addPlayer(players);
             }
+        } else {
+            for(Player player:this.players) {
+                player.newRound();
+                this.round.addPlayer(players);
+            }
         }
         this.players.lastPlayer(this.dealer);
         // DEBUG
         System.out.println("Pot: " + this.pot);
+        System.out.println("dabei: " + this.round.getPlayers());
     }
 
     public void lupf() { 

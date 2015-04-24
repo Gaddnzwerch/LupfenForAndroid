@@ -33,10 +33,13 @@ public class Test {
         table.addPlayer(new Player());
         table.addPlayer(new Player());
         table.addPlayer(new Player());
-        table.startRound();
-        table.lupf();
-        table.playRound();
-        table.finishRound();
+        for (int i = 1; i <= 3; i++) {
+            table.startRound();
+            table.lupf();
+            table.playRound();
+            table.finishRound();
+        }
+
         /*
         for (int i = 0; i<3; i++) {
             player1.receiveCard(cardStack.pop());
