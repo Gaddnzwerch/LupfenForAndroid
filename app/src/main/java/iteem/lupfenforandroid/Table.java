@@ -88,4 +88,8 @@ public class Table {
             this.dealer = aPlayer;
         }
     }
+
+    public int getPot() {
+        return this.pot;
+    }
 }

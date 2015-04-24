@@ -7,6 +7,7 @@ public class Round {
     private Boolean isObligatory; // if true, all players must play 
     private Stack<Card> stack;
     private Trick trick; 
+    private Boolean complete;
 
     public Round(Stack<Card> aShuffledCards) {
         this.stack = aShuffledCards;

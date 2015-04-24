@@ -31,32 +31,11 @@ public class Test {
         table.addPlayer(new Player());
         table.addPlayer(new Player());
         table.addPlayer(new Player());
-        table.addPlayer(new Player());
-        table.addPlayer(new Player());
-        for (int i = 1; i <= 3; i++) {
+        do {
             table.startRound();
             table.lupf();
             table.playRound();
             table.finishRound();
-        }
-
-        /*
-        for (int i = 0; i<3; i++) {
-            player1.receiveCard(cardStack.pop());
-            player2.receiveCard(cardStack.pop());
-            player3.receiveCard(cardStack.pop());
-        }
-        Trick trick = new Trick(cardStack.pop());
-        // DEBUG
-        System.out.println(trick.getTrumpColour() + " ist Trumpf");
-        player1.calculatePlayableCards(trick);
-        trick.play(player1, player1.playCard());
-        player2.calculatePlayableCards(trick);
-        trick.play(player2, player2.playCard());
-        player3.calculatePlayableCards(trick);
-        trick.play(player3, player3.playCard());
-        System.out.println(trick.getWinner());
-        System.out.println(cardStack);
-        */
+        } while (table.getPot() != 0);
     }
 }
