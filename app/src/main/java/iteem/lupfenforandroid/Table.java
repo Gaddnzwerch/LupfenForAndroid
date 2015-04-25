@@ -66,10 +66,11 @@ public class Table {
         } else {
             for(Player player:this.players) {
                 if (player.decideToPlay(this.round)) {
-                    // TODO avoid adding the player that lupfed…
-                    // DEBUG
-                    System.out.println(player + " ist dabei!");
-                    this.round.addPlayer(player);
+                    if (!this.round.getPlayers().hasPlayer(player)) {
+                        // DEBUG
+                        System.out.println(player + " ist dabei!");
+                        this.round.addPlayer(player);
+                    }
                 }
             }
         }

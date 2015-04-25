@@ -23,6 +23,9 @@ public class Playround extends Vector<Player>{
        } 
        this.lastIndex = index;
    }
+   public Boolean hasPlayer(Player aPlayer) {
+        return (this.indexOf(aPlayer) != -1);
+    }
 
    @Override
    public Iterator<Player> iterator() {
