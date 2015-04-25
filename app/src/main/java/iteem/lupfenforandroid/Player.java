@@ -58,6 +58,17 @@ public class Player {
         System.out.println(this + " spielt " + card);
         return card;
     }
+
+    public Boolean decideToLupf(Round aRound) {
+        //TODO has to be in UI
+        return true;
+    }
+
+    public Boolean decideToPlay(Round aRound) {
+        //TODO has to be in UI
+        return true;
+    }
+
     public void calculatePlayableCards(Trick aTrick) {
         // when first player, all cards can be played
         // if there is the same colour this card has to be played

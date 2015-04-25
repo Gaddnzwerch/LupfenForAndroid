@@ -27,27 +27,52 @@ public class Table {
         this.deal(NOOFCARDS, stack);
         this.round = new iteem.lupfenforandroid.Round(stack);
         this.round.setObligatory(this.pot == 0);
+    }
+
+    public void preLupf() {
         if(this.round.isObligatory()) {
             for(Player player:this.players) {
                 player.newRound();
                 player.pay(BET);
                 this.pot += BET;
+                this.round.lupf();
                 this.round.addPlayer(players);
             }
         } else {
             for(Player player:this.players) {
-                player.newRound();
-                this.round.addPlayer(players);
+                if (player.decideToLupf(this.round)) {
+                    // DEBUG
+                    System.out.println(player + " hat gelupft!");
+                    this.round.lupf();
+                    this.round.addPlayer(player);
+                    this.round.getPlayers().firstPlayer(player);
+                    break;
+                }
             }
         }
         this.players.lastPlayer(this.dealer);
+
         // DEBUG
         System.out.println("Pot: " + this.pot);
         System.out.println("dabei: " + this.round.getPlayers());
     }
 
-    public void lupf() { 
-        this.round.lupf();
+    public void prePlay() {
+        //TODO add obligatory colours here
+        if(this.round.isObligatory()) {
+            for(Player player:this.players) {
+                this.round.addPlayer(players);
+        }
+        } else {
+            for(Player player:this.players) {
+                if (player.decideToPlay(this.round)) {
+                    // TODO avoid adding the player that lupfed…
+                    // DEBUG
+                    System.out.println(player + " ist dabei!");
+                    this.round.addPlayer(player);
+                }
+            }
+        }
     }
 
     public void playRound() {

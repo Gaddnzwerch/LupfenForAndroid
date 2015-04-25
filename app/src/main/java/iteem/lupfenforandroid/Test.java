@@ -31,11 +31,12 @@ public class Test {
         table.addPlayer(new Player());
         table.addPlayer(new Player());
         table.addPlayer(new Player());
-        do {
+        for (int i = 0; i <= 5; i++) {
             table.startRound();
-            table.lupf();
+            table.preLupf();
+            table.prePlay();
             table.playRound();
             table.finishRound();
-        } while (table.getPot() != 0);
+        }
     }
 }
