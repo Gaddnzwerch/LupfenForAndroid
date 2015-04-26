@@ -12,4 +12,7 @@
     <string name="deck_cardname3">König</string>
     <string name="deck_cardname4">10</string>
     <string name="deck_cardname5">Ass</string>
+    <string name="join">Join existing game</string>
+    <string name="host_and_play">Host game and play</string>
+    <string name="host_button">Host a game</string>
 </resources>
