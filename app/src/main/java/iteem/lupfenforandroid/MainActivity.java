@@ -11,6 +11,7 @@ import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+    static final int CHOOSE_PLAYER_NAME = 1;
 
     Button joinButton;
     Button hostAndPlayButton;
@@ -65,7 +66,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void joinGame(View v) {
         System.out.println("Join");
         Intent intent = new Intent(this, EnterPlayerInformation.class);
-        startActivity(intent);
+        startActivityForResult(intent, CHOOSE_PLAYER_NAME);
     }
 
     public void hostAndJoinGame(View v) {
@@ -77,4 +78,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         System.out.println("Hosting");
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // DEBUG
+        System.out.println("Result!");
+
+        if (requestCode == CHOOSE_PLAYER_NAME) {
+            if (resultCode == RESULT_OK) {
+                String playerName = data.getExtras().getString(EnterPlayerInformation.PLAYER_NAME);
+                System.out.println(playerName);
+            }
+        }
+    }
 }
