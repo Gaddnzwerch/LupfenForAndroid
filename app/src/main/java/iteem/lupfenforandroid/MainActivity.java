@@ -22,11 +22,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         // link the buttons to the corresponding actions
         joinButton = (Button) findViewById(R.id.join_button);
-        joinButton.setOnClickListener(this);
+        // joinButton.setOnClickListener(this);
         hostAndPlayButton = (Button) findViewById(R.id.host_play_button);
-        hostAndPlayButton.setOnClickListener(this);
+        // hostAndPlayButton.setOnClickListener(this);
         hostButton = (Button) findViewById(R.id.host_button);
-        hostButton.setOnClickListener(this);
+        // hostButton.setOnClickListener(this);
     }
 
 
@@ -53,10 +53,25 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    // implementing an interface and adding a listener to the button
     @Override
     public void onClick(View v) {
         if(v==findViewById(R.id.join_button)) {
             System.out.println("Join");
         }
     }
+
+    public void joinGame(View v) {
+        System.out.println("Join");
+    }
+
+    public void hostAndJoinGame(View v) {
+        System.out.println("Hosting and joining");
+    }
+
+    // direct linking from the xml - fast but not optimal for maintenance?
+    public void hostGame(View v) {
+        System.out.println("Hosting");
+    }
+
 }

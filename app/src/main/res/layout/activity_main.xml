@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/join"/>
+        android:text="@string/join"
+        android:onClick="joinGame"/>
 
     <Button
         android:id="@+id/host_play_button"
@@ -19,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/host_and_play"/>
+        android:text="@string/host_and_play"
+        android:onClick="hostAndJoinGame"/>
 
     <Button
         android:id="@+id/host_button"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/host_button"/>
+        android:text="@string/host_button"
+        android:onClick="hostGame"/>
 
 </LinearLayout>

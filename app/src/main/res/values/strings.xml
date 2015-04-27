@@ -15,4 +15,8 @@
     <string name="join">Join existing game</string>
     <string name="host_and_play">Host game and play</string>
     <string name="host_button">Host a game</string>
+    <string name="player_information">Player information</string>
+    <string name="host_information">Host information</string>
+    <string name="player_name">Player name</string>
+    <string name="send">Send</string>
 </resources>
