@@ -64,7 +64,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void joinGame(View v) {
-        System.out.println("Join");
         Intent intent = new Intent(this, EnterPlayerInformation.class);
         startActivityForResult(intent, CHOOSE_PLAYER_NAME);
     }
@@ -80,15 +79,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // DEBUG
-        System.out.println("Result!");
 
         if (requestCode == CHOOSE_PLAYER_NAME) {
             if (resultCode == RESULT_OK) {
                 String playerName = data.getExtras().getString(EnterPlayerInformation.PLAYER_NAME);
                 Player player = ActivePlayer.getInstance();
                 player.setName(playerName);
-                System.out.println(player);
+                Intent intent = new Intent(this, TableActivity.class);
+                startActivity(intent);
             }
         }
     }
