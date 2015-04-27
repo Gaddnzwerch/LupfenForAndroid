@@ -86,7 +86,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         if (requestCode == CHOOSE_PLAYER_NAME) {
             if (resultCode == RESULT_OK) {
                 String playerName = data.getExtras().getString(EnterPlayerInformation.PLAYER_NAME);
-                System.out.println(playerName);
+                Player player = ActivePlayer.getInstance();
+                player.setName(playerName);
+                System.out.println(player);
             }
         }
     }

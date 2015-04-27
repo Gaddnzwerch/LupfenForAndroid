@@ -20,6 +20,10 @@
             android:name=".EnterPlayerInformation"
             android:label="@string/title_activity_enter_player_information" >
         </activity>
+        <activity
+            android:name=".TableActivity"
+            android:label="@string/title_activity_table" >
+        </activity>
     </application>
 
 </manifest>
