@@ -1,5 +1,6 @@
 package iteem.lupfenforandroid;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +64,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public void joinGame(View v) {
         System.out.println("Join");
+        Intent intent = new Intent(this, EnterPlayerInformation.class);
+        startActivity(intent);
     }
 
     public void hostAndJoinGame(View v) {

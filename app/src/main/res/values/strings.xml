@@ -19,4 +19,5 @@
     <string name="host_information">Host information</string>
     <string name="player_name">Player name</string>
     <string name="send">Send</string>
+    <string name="title_activity_enter_player_information">EnterPlayerInformation</string>
 </resources>
