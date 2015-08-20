@@ -11,5 +11,39 @@
         android:text="@string/hello_world"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/pot"
+        android:layout_toRightOf="@+id/active_player_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"/>
+
+    <!-- TODO replace by a List -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/own_card1"
+            android:layout_marginBottom="5dp"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+            android:onClick="playCard"/>
+        <ImageView
+            android:id="@+id/own_card2"
+            android:layout_marginLeft="5dp"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+            android:onClick="playCard"/>
+        <ImageView
+            android:id="@+id/own_card3"
+            android:layout_marginBottom="5dp"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+            android:onClick="playCard"/>
+    </LinearLayout>
 
 </RelativeLayout>

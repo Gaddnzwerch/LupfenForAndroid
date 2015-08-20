@@ -9,7 +9,7 @@ public class Player {
     private boolean cardsSeen;
     private Vector<Trick> tricks;
     private int cardValue;
-    private Vector<Card> playableCards;
+    protected Vector<Card> playableCards;
 
     public Player() {
         this.cards = new Vector<>();

@@ -5,10 +5,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
 public class TableActivity extends ActionBarActivity {
+    Deck deck;
+    Table table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,17 @@ public class TableActivity extends ActionBarActivity {
         TextView activePlayerName = (TextView) findViewById(R.id.active_player_name);
         Player activePlayer = ActivePlayer.getInstance();
         activePlayerName.setText(activePlayer.getName());
+
+        deck = Deck.createDeck();
+        table = new Table(deck);
+        table.addPlayer(activePlayer);
+        table.addPlayer(new Player());
+        table.addPlayer(new Player());
+        table.startRound();
+        table.preLupf();
+        table.prePlay();
+        table.playRound();
+        table.finishRound();
     }
 
 
@@ -42,5 +56,10 @@ public class TableActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Card playCard(View v) {
+        System.out.println(v.toString());
+        return null;
     }
 }

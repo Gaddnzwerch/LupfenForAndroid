@@ -27,7 +27,6 @@ public class Test {
         deck.add(new Card(11,"Ass","Eichel"));
 
         Table table = new Table(deck);
-        Stack<Card> cardStack = deck.shuffle();
         table.addPlayer(new Player());
         table.addPlayer(new Player());
         table.addPlayer(new Player());
